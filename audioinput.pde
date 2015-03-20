@@ -47,19 +47,30 @@ void setup() {
   sliceSize = (sketchWidth() / in.bufferSize()) * 4;  
 }
 
+void drawAmplitudeBar(int slice, int yOrigin, float amplitude) {
+ 
+  float x, y, h;  
+  x = slice * sliceSize;
+  h = (amplitude * 3000);
+  if(amplitude < 0) {
+    y = yOrigin + h;
+  } else {
+    y = yOrigin;
+  }
+  
+  rect(x, y, sliceSize * 4, Math.abs(h));
+}
+
 void draw() 
 {
   background(0, 211, 211);
 
-  // y is down as it increases
-  // if we want to draw lines from center outwards
   for(int i = 0; i < in.bufferSize() - 1; i+= 4)
   {
-    stroke(255, 0, 0);    
-    line(i* sliceSize, (sketchHeight() / 2), (i) * sliceSize, (sketchHeight()/ 2) + in.mix.get(i + 1)*3000);
+    stroke(135, 0, 136);    
+    line(i* sliceSize, (sketchHeight() / 4), i * sliceSize, (sketchHeight() / 4) - (in.left.get(i + 1) * 3000));
     stroke(123, 183, 0);
-//    println(in.mix.get(i));
-//    rect(i * sliceSize, (sketchHeight()/ 2) + in.mix.get(i)*700, sliceSize, in.mix.get(i)*700);
+    drawAmplitudeBar(i, 3 * sketchHeight() / 4, in.right.get(i)); 
   }
   
   if(beat.isKick()) {
