@@ -34,3 +34,6 @@ After installing Soundflower restart your computer.
 5. Press play in a music app
 6. Return to processing and you should see stuff happen
 7. Get weird
+
+# References
++ http://sweb.cityu.edu.hk/sm1204/2012A/page20/index.html
